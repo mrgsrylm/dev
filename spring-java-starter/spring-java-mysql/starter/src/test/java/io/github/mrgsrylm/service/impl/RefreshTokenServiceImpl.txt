@@ -1,0 +1,39 @@
+package org.superosystem.wasteclass.service.impl;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import base.io.github.mrgsrylm.BaseServiceTest;
+import entity.io.github.mrgsrylm.UserEntity;
+import repository.io.github.mrgsrylm.RefreshTokenRepository;
+import service.io.github.mrgsrylm.UserService;
+import util.io.github.mrgsrylm.RandomUtil;
+
+import java.util.Optional;
+
+public class RefreshTokenServiceImpl extends BaseServiceTest {
+    @InjectMocks
+    private RefreshTokenServiceImpl service;
+
+    @Mock
+    private RefreshTokenRepository repository;
+    @Mock
+    private UserService userService;
+
+    void givenUser_WhenCreateRefreshToken_ReturnString() {
+        // Given
+        UserEntity mockRec = UserEntity.builder()
+                .id(1L)
+                .fullName(RandomUtil.generateRandomString())
+                .username(RandomUtil.generateRandomString())
+                .email(RandomUtil.generateRandomString().concat("@wastecass.org"))
+                .password(RandomUtil.generateRandomString())
+                .build();
+
+
+
+        // When
+        Mockito.when(repository.findByUserId(Mockito.anyLong())).thenReturn(Optional.)
+        // Then
+    }
+}
