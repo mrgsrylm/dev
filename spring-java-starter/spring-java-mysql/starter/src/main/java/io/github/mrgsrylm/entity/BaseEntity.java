@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
     @Column(name = "CREATED_USER")
     protected String createdUser;
 
@@ -27,23 +27,23 @@ public class BaseEntity {
     @Column(name = "UPDATED_AT")
     protected LocalDateTime updatedAt;
 
-//    @PrePersist
-//    public void prePersist() {
-//        this.createdUser = getUsernameFromAuthentication();
-//        this.createdAt = LocalDateTime.now();
-//    }
-//
-//    @PreUpdate
-//    public void preUpdate() {
-//        this.updatedUser = getUsernameFromAuthentication();
-//        this.updatedAt = LocalDateTime.now();
-//    }
+   @PrePersist
+   public void prePersist() {
+       this.createdUser = getUsernameFromAuthentication();
+       this.createdAt = LocalDateTime.now();
+   }
 
-//    private String getUsernameFromAuthentication() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
-//            return userDetails.getUsername();
-//        }
-//        return "anonymousUser";
-//    }
+   @PreUpdate
+   public void preUpdate() {
+       this.updatedUser = getUsernameFromAuthentication();
+       this.updatedAt = LocalDateTime.now();
+   }
+
+   private String getUsernameFromAuthentication() {
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+           return userDetails.getUsername();
+       }
+       return "anonymousUser";
+   }
 }

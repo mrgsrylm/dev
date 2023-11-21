@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+# MYSQL
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/springbookstore
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:my-secret-pw}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+      show-sql: true
+
+jwt:
+  secret: S3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeYS3cR3tKeY
+  expireMs: 60000
+  refreshExpireMs: 12000
