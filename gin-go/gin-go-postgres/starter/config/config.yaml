@@ -1,0 +1,5 @@
+environment: development
+http_port: 8888
+auth_secret: S3cR3tS3cR3tS3cR3tS3cR3tS3cR3t
+
+database_uri: postgres://user:my-secret-pw@localhost:5432/shabank_dev

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: shabank-postgres
+    image: postgres:15.3
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: my-secret-pw
+      POSTGRES_DB: shabank_db
+    ports:
+      - "5432:5432"
+
