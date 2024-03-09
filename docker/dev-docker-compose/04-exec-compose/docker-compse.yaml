@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  task-manager:
+    build:
+      context: ../02-run-app-using-compose/.
+    image: host.docker.internal:5000/task-manager:0.1
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST=redis:6379
+      
+  redis:
+    image: redis
+    ports:
+      - 6379:6379

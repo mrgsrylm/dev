@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  task-manager:
+    build:
+      context: .
+      labels:
+        - org.superosystem.compose.app=task-manager
+    image: task-manager:0.1
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST=redis:6379
+    depends_on:
+      - redis
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    labels:
+      - org.superosystem.compose.app=task-manager
+
+  redis-populate:
+    image: redis
+    entrypoint: [ "/redis/redis-populate.sh", "/redis/redis-populate.txt" ]
+    depends_on:
+      - redis
+    env_file:
+      - ./env.redis-populate
+    volumes:
+      - ./redis/redis-populate.txt:/redis-populate.txt
+      - ./redis/redis-populate.sh:/redis-populate.sh
+    labels:
+      - org.superosystem.compose.app=task-manager
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    labels:
+      - org.superosystem.compose.app=task-manager
